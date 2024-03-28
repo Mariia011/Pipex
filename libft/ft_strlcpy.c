@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/23 14:01:39 by marikhac          #+#    #+#             */
+/*   Updated: 2024/01/31 17:20:53 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+static size_t	ft_min(size_t a, size_t b)
 {
-	if(access());
+	if (a > b)
+		return (b);
+	return (a);
 }
 
-int main(int argc, char **argv, char **shtoto)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
-	{
-		perror("Error, please open the pipe properly");
-		return(1);
-	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
+	size_t	i;
+	size_t	src_len;
+	size_t	min;
 
+	i = 0;
+	src_len = ft_strlen(src);
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	min = ft_min(dstsize - 1, src_len);
+	while (i < min)
+	{
+		dst[i] = src[i];
+		i++;
 	}
-
+	dst[min] = '\0';
+	return (ft_strlen(src));
 }

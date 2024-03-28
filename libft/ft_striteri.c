@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/30 13:50:59 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/05 17:28:47 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if(access());
-}
+	unsigned int	len;
+	unsigned int	i;
 
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	if (!s)
+		return ;
+	len = ft_strlen(s);
+	i = 0;
+	while (i < len)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		f(i, s + i);
+		i++;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
 }

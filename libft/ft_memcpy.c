@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/23 13:41:48 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/02 11:25:04 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if(access());
-}
+	size_t	i;
 
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	if (!dst && !src && n)
+		return (NULL);
+	i = 0;
+	while (i < n)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		((char *)dst)[i] = ((char *)src)[i];
+		i++;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
+	return (dst);
 }

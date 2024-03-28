@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/02/04 20:09:21 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/05 17:26:55 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if(access());
-}
-
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	if (!lst || !f)
+		return ;
+	while (lst)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		f(lst->content);
+		lst = lst->next;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
+	return ;
 }

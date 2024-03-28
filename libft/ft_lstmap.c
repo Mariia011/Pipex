@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/02/04 20:10:38 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/07 19:01:42 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+static void	_lstmap(t_list *other, t_list **head, void *(*f)(void *),
+		void (*del)(void *))
 {
-	if(access());
+	if (!other)
+		return ;
+	*head = ft_lstnew(f(other->content));
+	_lstmap(other->next, &((*head)->next), f, del);
 }
 
-int main(int argc, char **argv, char **shtoto)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
-	{
-		perror("Error, please open the pipe properly");
-		return(1);
-	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
+	t_list	*head;
 
-	}
-
+	if (!lst || !f || !del)
+		return (NULL);
+	_lstmap(lst, &head, f, del);
+	return (head);
 }

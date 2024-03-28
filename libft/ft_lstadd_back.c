@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/02/04 17:18:48 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/06 19:27:31 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if(access());
-}
-
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	if (!new || !lst)
+		return ;
+	if (!*lst)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		*lst = new;
+		return ;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
+	ft_lstlast(*lst)->next = new;
 }

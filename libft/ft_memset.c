@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/22 17:41:56 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/02 11:24:25 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	if(access());
-}
+	char	*str;
+	size_t	i;
 
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	str = (char *)b;
+	i = 0;
+	while (i < len)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		str[i] = c;
+		i++;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
+	return (str);
 }

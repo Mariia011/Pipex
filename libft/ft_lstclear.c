@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/02/04 20:05:40 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/07 17:32:54 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if(access());
-}
+	t_list	*cccp;
 
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	if (!lst || !(*lst) || !del)
+		return ;
+	while (*lst != NULL)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		cccp = ((*lst)->next);
+		ft_lstdelone((*lst), del);
+		(*lst) = cccp;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
+	return ;
 }

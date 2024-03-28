@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/24 15:27:21 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/01 13:54:10 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+char	*ft_strdup(const char *src)
 {
-	if(access());
-}
+	char	*null_term;
+	char	*tmp;
 
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	null_term = malloc(ft_strlen(src) + 1);
+	if (!null_term)
+		return (NULL);
+	tmp = null_term;
+	while (*src != '\0')
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		*tmp = *src;
+		src++;
+		tmp++;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
+	*tmp = *src;
+	return (null_term);
 }

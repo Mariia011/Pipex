@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/23 13:17:30 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/01 13:38:06 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if(access());
-}
+	int		i;
+	char	*ptr;
+	char	*ptr2;
 
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	ptr = (char *)dst;
+	ptr2 = (char *)src;
+	if (!src && !dst && len)
+		return (NULL);
+	if (dst < src)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		ft_memcpy(dst, src, len);
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
+	else
 	{
-
+		i = ((int)len) - 1;
+		while (i >= 0)
+		{
+			ptr[i] = ptr2[i];
+			i--;
+		}
 	}
-
+	return (dst);
 }

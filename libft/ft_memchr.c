@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/03/28 16:48:30 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/24 15:46:42 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/07 18:15:45 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-
-int check_of_func(char *str)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if(access());
-}
+	unsigned char		c_char;
+	const unsigned char	*str;
+	size_t				i;
 
-int main(int argc, char **argv, char **shtoto)
-{
-	int fd[2];
-	pid_t pid;
-	if(pipe(fd) == -1)
+	c_char = (unsigned char)c;
+	str = (const unsigned char *)s;
+	if (!n)
+		return (NULL);
+	i = 0;
+	while (i < n)
 	{
-		perror("Error, please open the pipe properly");
-		return(1);
+		if (str[i] == c_char)
+		{
+			return ((void *)str + i);
+		}
+		i++;
 	}
-	int id = fork();
-	pid = getpid();
-	if(pid == 0)
-	{
-
-	}
-
+	return (NULL);
 }
