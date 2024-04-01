@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+		"libft.h": "c",
+		"stdio.h": "c",
+		"stdexcept": "c",
+		"string": "c",
+		"xlocale.h": "c",
+		"*.z": "c",
+		"bitset": "c"
+	}
+}
