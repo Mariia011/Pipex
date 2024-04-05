@@ -6,13 +6,13 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/04 20:18:53 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:16:10 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	exit_(void)
+void	exit_()
 {
 	perror("./pipex infile cmd1 cmd2 outfile\n");
 	exit(-1);
@@ -31,10 +31,16 @@ char	**env_p(char *path)
 	return (env_p);
 }
 
-void free_stuff(char **free)
+void free_stuff(char **someth)
 {
-
-
+	int i;
+	while(someth[i])
+	{
+		free(someth[i]);
+		i++;
+	}
+	someth = NULL;
+	printf("OK");
 }
 
 char	*get_paths(char **env)

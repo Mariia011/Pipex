@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/04 20:17:38 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:20:13 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*_check_(char *cmd, char *path)
 		res = ft_strjoin(env[i], cmd);
 		if (access(res, X_OK | F_OK) == 0)
 		{
+			printf("%s\n", res);
 			free(env);
 			return (res);
 		}
@@ -39,6 +40,8 @@ char	*_check_(char *cmd, char *path)
 
 int file_open(char *path, int mode)
 {
+	int fd;
+
 	if(mode == 0)
 		fd = open(path, O_RDONLY);
 	if(mode == 1)
@@ -50,47 +53,53 @@ int file_open(char *path, int mode)
 
 void the_exec(char *cmd, char **env)
 {
-	char	**s_cmd;
-	char	*path;
-
-	s_cmd = ft_split(cmd, ' ');
-	path = get_path(s_cmd[0], env);
-	if (execve(path, s_cmd, env) == -1)
-	{
-		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
-		ft_free_tab(s_cmd);
-		exit(0);
-	}
-	free(cmd);
+	printf("pi[o[]]");
 }
 
-void	child_process(int end, char **argv, char *path, int mode)
+// void child_process()
+// {
+
+// }
+
+void	cp_process(int end, char **argv, char *path, int mode, char **env)
 {
 	int file_d;
 	char *cmd;
-	cmd = _check_(cmd);
-	if(!cmd)
-		exit_();
+
+	// if(!cmd)
+	// {
+	// 	printf("no cmd");
+	// 	exit_();
+	// }
 	if(mode == 0)
 	{
-		if(execve(cmd, path) == 0)
-			file_d = file_open(file, 0);
+		cmd = _check_(argv[2], path);
+		printf("%s", cmd);
+		if(execve(cmd, &path, env) == 0)
+			file_d = file_open(argv[1], 0);
 		else
-			exit();
+		{
+			printf("cp stop");
+			exit_();
+		}
 		dup2(file_d, 0);
 		dup2(end, 1);
 	}
 	else
 	{
-		if (execve(cmd, path) == 0)
-			file_d = file_open(file, 1);
+		cmd = _check_(argv[3], path);
+		printf("%s", cmd);
+		if (execve(cmd, &path, env) == 0)
+			file_d = file_open(argv[4], 1);
 		else
-			exit();
+		{
+			printf("parent p stop");
+			exit_();
+		}
 		dup2(file_d, 0);
 		dup2(end, 0);
 	}
-	exec(cmd, env);
+	//the_exec(cmd, env);
 	close(end);
 }
 
@@ -106,10 +115,13 @@ int	main(int argc, char *argv[], char *env[])
 	pid = fork();
 	path = get_paths(env);
 	if (pid < 0)
+	{
+		printf("no pid");
 		exit(-1);
-	if (!pid)
-		child_process(end[0], argv, path, 0);
-	parent_process(end[1], argv, path, 1);
+	}
+	if (pid == 0)
+		cp_process(end[0], argv, path, 0, env);
+	cp_process(end[1], argv, path, 1, env);
 	free(path);
 	return (1);
 }
