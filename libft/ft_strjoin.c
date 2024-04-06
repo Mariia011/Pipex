@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:47:16 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/01 17:08:12 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:10:53 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup(s2));
+		return (ft_strdup(s2, 0));
 	if (!s2)
-		return (ft_strdup(s1));
+		return (ft_strdup(s1, 0));
 	strr = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (strr)
 	{

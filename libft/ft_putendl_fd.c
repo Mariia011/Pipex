@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/06 16:43:50 by marikhac         ###   ########.fr       */
+/*   Created: 2024/01/30 13:05:55 by marikhac          #+#    #+#             */
+/*   Updated: 2024/02/01 11:48:18 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	exit_()
+void	ft_putendl_fd(char *s, int fd)
 {
-	// perror("./pipex infile cmd1 cmd2 outfile\n");
-	perror("Chi stacvum\n");
-
-	exit(0);
-}
-
-void free_stuff(char **someth)
-{
-	int i;
-
-	i = 0;
-	while(someth[i])
-	{
-		free(someth[i]);
-		i++;
-	}
-	free(someth);
-	someth = NULL;
-	printf("FREED MEMORY\n");
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:24:39 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/01 17:15:54 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:36:17 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
 
 char	*ft_strchr(const char *s, int c)
 {

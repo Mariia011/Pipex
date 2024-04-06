@@ -6,18 +6,15 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:50:34 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/05 15:26:13 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/06 16:58:53 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-// #define NO_CMD "No such command"
-
-# include "./get_next_line/get_next_line.h"
 //# include "./libft/libft.h"
-# include "libft.h"
+# include "libft/libft.h"
 
 # include <unistd.h>
 # include <sys/types.h>
@@ -28,10 +25,13 @@
 # include <sys/wait.h>
 #include <errno.h>
 
-void exit_(void);
-char *get_paths(char **env);
-char **env_p(char *path);
-void free_stuff(char **someth);
+char	*get_path_envp(char **env);
+char	**env_p(char *path);
+char	*check_cmd(char *argv_cmd, char *path);
+
+
+void	free_stuff(char **someth);
+void	exit_(void);
 
 
 

@@ -13,12 +13,6 @@ $(NAME) : $(OBJS)
 
 $(OBJS) : $(MANDATORY)
 	$(CC) $(CFLAGS) $(MANDATORY)
-
-bonus : $(NAME) $(BONUS_OBJS)
-
-	ar -rcs $(NAME) $(BONUS_OBJS)
-
-
 clean :
 	rm -f $(OBJS)
 
@@ -27,4 +21,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY :  all clean fclean re bonus
+.PHONY :  all clean fclean re
