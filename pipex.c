@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/10 18:58:33 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:38:35 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void the_exec(char *cmd, char *path, char **env)
 	path_ = check_cmd(exec_cmd[0], path);
 	if (execve(path_, exec_cmd, env) == -1)
 	{
-		printf("sdk");
+		ft_printf("sdk");
 		free_stuff(exec_cmd);
 		exit(0);
 	}
@@ -45,31 +45,30 @@ void child_process(char **argv, char **env, int *end)
 	int 	fd;
 	char 	*path;
 
-	printf("MASHA");
+	ft_printf("MASHA");
 	fd = file_open(argv[1], 0);
 
 	// path = get_path_envp(env);
-	dup2(fd, STDIN_FILENO);
-	dup2(end[1], STDOUT_FILENO);
-	close(end[0]);
-	// free(path);
-	the_exec(argv[2], path, env);
-
+	// dup2(fd, STDIN_FILENO);
+	// dup2(end[1], STDOUT_FILENO);
+	// close(end[0]);
+	// // free(path);
+	// the_exec(argv[2], path, env);
 }
 
 void parent_process(char **argv, char **env, int *end)
 {
-	printf("MASHA");
+	ft_printf("MASHA");
 	int fd;
 	char 	*path;
 
-	fd = file_open(argv[4], 1);
-	path = get_path_envp(env);
-	dup2(fd, STDOUT_FILENO);
-	dup2(end[0], STDIN_FILENO);
-	close(end[1]);
+	// fd = file_open(argv[4], 1);
+	// path = get_path_envp(env);
+	// dup2(fd, STDOUT_FILENO);
+	// dup2(end[0], STDIN_FILENO);
+	// close(end[1]);
 
-	the_exec(argv[3], path, env);
+	// the_exec(argv[3], path, env);
 }
 
 int	main(int argc, char *argv[], char *env[])

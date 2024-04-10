@@ -6,14 +6,14 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:50:34 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/10 18:38:14 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:39:56 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-//# include "./libft/libft.h"
+# include "./ft_printf/ft_printf.h"
 # include "libft/libft.h"
 
 # include <unistd.h>
