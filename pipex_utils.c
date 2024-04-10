@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/06 16:43:50 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:38:18 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	exit_()
 {
 	// perror("./pipex infile cmd1 cmd2 outfile\n");
-	perror("Chi stacvum\n");
+	printf("Chi stacvvvvvum\n");
 
-	exit(0);
+	exit(-1);
 }
 
 void free_stuff(char **someth)
@@ -32,5 +32,5 @@ void free_stuff(char **someth)
 	}
 	free(someth);
 	someth = NULL;
-	printf("FREED MEMORY\n");
+	printf("AAAAAAAa\n");
 }

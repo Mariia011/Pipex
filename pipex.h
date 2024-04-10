@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:50:34 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/06 16:58:53 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:38:14 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,20 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-#include <errno.h>
+# include <errno.h>
+
+// typedef struct s_pipex{
+// 	char 	*path;
+// 	char	**argv;
+// 	char	**env;
+// 	int		pipe[2];
+// } t_pipex;
 
 char	*get_path_envp(char **env);
 char	**env_p(char *path);
 char	*check_cmd(char *argv_cmd, char *path);
 
-
 void	free_stuff(char **someth);
 void	exit_(void);
-
-
 
 #endif
