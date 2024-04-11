@@ -6,88 +6,75 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/10 19:38:35 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:23:54 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int file_open(char *path, int mode)
+void	parent_process(char **env_p, char *path)
 {
-	int fd;
-
-	if(mode == 0)
-		fd = open(path, O_RDONLY, 0777);
-	if(mode == 1)
-		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if(mode == -1)
-		exit(-1);
-	return(fd);
+	free_stuff(env_p);
+	free(path);
+	env_p = NULL;
+	path = NULL;
 }
 
-void the_exec(char *cmd, char *path, char **env)
+void	first_state_process(char **argv, char **env, int *end, char *path,
+		char **env_p)
 {
-	char *path_;
-	char **exec_cmd;
+	int	fd;
 
-	exec_cmd = ft_split(cmd, ' ');
-	path_ = check_cmd(exec_cmd[0], path);
-	if (execve(path_, exec_cmd, env) == -1)
-	{
-		ft_printf("sdk");
-		free_stuff(exec_cmd);
-		exit(0);
-	}
-}
-
-void child_process(char **argv, char **env, int *end)
-{
-	int 	fd;
-	char 	*path;
-
-	ft_printf("MASHA");
 	fd = file_open(argv[1], 0);
-
-	// path = get_path_envp(env);
-	// dup2(fd, STDIN_FILENO);
-	// dup2(end[1], STDOUT_FILENO);
-	// close(end[0]);
-	// // free(path);
-	// the_exec(argv[2], path, env);
+	dup2(fd, STDIN_FILENO);
+	dup2(end[1], STDOUT_FILENO);
+	close(end[0]);
+	// free(path);
+	the_exec(argv[2], path, env, env_p);
+	free(path);
+	// free memory
+	exit(EXIT_FAILURE);
 }
 
-void parent_process(char **argv, char **env, int *end)
+void	second_state_process(char **argv, char **env, int *end, char *path,
+		char **env_p)
 {
-	ft_printf("MASHA");
-	int fd;
-	char 	*path;
+	int	fd;
 
-	// fd = file_open(argv[4], 1);
+	fd = file_open(argv[4], 1);
 	// path = get_path_envp(env);
-	// dup2(fd, STDOUT_FILENO);
-	// dup2(end[0], STDIN_FILENO);
-	// close(end[1]);
-
-	// the_exec(argv[3], path, env);
+	dup2(fd, STDOUT_FILENO);
+	dup2(end[0], STDIN_FILENO);
+	close(end[1]);
+	the_exec(argv[3], path, env, env_p);
+	free(path);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char *argv[], char *env[])
 {
 	pid_t	pid;
+	pid_t	pid2;
 	int		end[2];
+	char	*path;
+	char	**env_p;
 
 	if (argc != 5)
-		return(0);
+		return (0);
 	if (pipe(end) < 0)
-		return(0);
+		return (0);
+	path = get_path_envp(env);
+	env_p = get_env_p(path);
 	pid = fork();
 	if (pid < 0)
-	{
-		printf("NO PID");
-		exit(-1);
-	}
-	if (pid == 0)
-		child_process(argv, env, end);
-	parent_process(argv, env, end);
+		exit_(1);
+	if (0 == pid)
+		first_state_process(argv, env, end, path, env_p);
+	pid2 = fork();
+	if (0 == pid)
+		second_state_process(argv, env, end, path, env_p); // child nema
+	waitpid(pid, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	parent_process(env_p, path);
 	return (1);
 }

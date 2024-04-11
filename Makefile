@@ -2,7 +2,9 @@ NAME = pipex
 
 GCC = gcc #-Wall -Wextra -Werror
 
-LIBFT = ./libft/libft.a
+HELPERPATH = ./ft_printf/
+
+HELPER = $(HELPERPATH)libftprintf.a
 
 MAKE = make -C
 
@@ -12,20 +14,21 @@ OBJS = $(MANDATORY:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT) $(OBJS)
-	$(GCC) $(LIBFT) $(OBJS) -o $@
+$(NAME) : $(HELPER) $(OBJS)
+	$(GCC) -fsanitize=address $(HELPER) $(OBJS) -o $@
 
-$(LIBFT) :
-	$(MAKE) ./libft
+$(HELPER) :
+	$(MAKE) $(HELPERPATH)
 
 $(OBJS) : $(MANDATORY)
 	$(GCC) -c $(MANDATORY)
 
 clean :
+	$(MAKE)  $(HELPERPATH) clean
 	rm -f $(OBJS)
 
-fclean :
-	$(MAKE)  ./libft fclean
+fclean : clean
+	$(MAKE)  $(HELPERPATH) fclean
 	rm -f $(NAME)
 
 re: fclean all

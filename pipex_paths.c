@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:40:48 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/10 18:38:15 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:23:45 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,39 @@ char	*get_path_envp(char **env)
 	return (path);
 }
 
-char	*check_cmd(char *argv_cmd, char *path)
+char	*check_cmd(char *argv_cmd, char *path, char **env_p)
 {
 	char	*res;
-	char	**env;
-	char 	**cmd;
+	char	**cmd;
 	int		i;
 
+	// char	**env;
 	i = 0;
 	cmd = ft_split(argv_cmd, ' ');
-	if(!cmd)
-		return(0);
-	env = env_p(path);
-	while (env[i])
+	if (!cmd)
+		return (0);
+	// env = env_p(path);
+	while (env_p[i])
 	{
-		res = ft_strjoin(env[i], "/");
-		res = ft_strjoin(env[i], cmd[0]);
+		res = ft_strjoin(env_p[i], "/");
+		res = ft_strjoin(env_p[i], cmd[0]);
 		if (access(res, X_OK | F_OK) == 0)
 		{
-			printf("%s\n", res);
-			free_stuff(env);
+			ft_printf("%s\n", res);
+			// free_stuff(env_p);
 			free_stuff(cmd);
 			return (res);
 		}
 		i++;
+		free(res);
+		res = NULL;
 	}
-	free_stuff(env);
+	// free_stuff(env);
 	free(res);
 	return (0);
 }
 
-char	**env_p(char *path)
+char	**get_env_p(char *path)
 {
 	char	**env_p;
 
