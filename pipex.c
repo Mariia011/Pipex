@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/11 20:23:54 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:33:25 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	main(int argc, char *argv[], char *env[])
 	char	**env_p;
 
 	if (argc != 5)
-		return (0);
+	{
+		perror("argument nema\n");
+		exit(EXIT_FAILURE);
+	}
 	if (pipe(end) < 0)
 		return (0);
 	path = get_path_envp(env);
