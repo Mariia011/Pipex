@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:20:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/03 14:30:13 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:39:22 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 size_t	ft_strlen(const char *s)
 {
 	int	i;
+
 	i = 0;
 	while (s[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/11 20:33:25 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/13 19:10:22 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	parent_process(char **env_p, char *path)
 {
+	// ft_printf("freeing memory");
 	free_stuff(env_p);
 	free(path);
 	env_p = NULL;
@@ -29,8 +30,8 @@ void	first_state_process(char **argv, char **env, int *end, char *path,
 	dup2(fd, STDIN_FILENO);
 	dup2(end[1], STDOUT_FILENO);
 	close(end[0]);
-	// free(path);
 	the_exec(argv[2], path, env, env_p);
+	// ft_printf("exec failed on %s", );
 	free(path);
 	// free memory
 	exit(EXIT_FAILURE);
@@ -51,6 +52,13 @@ void	second_state_process(char **argv, char **env, int *end, char *path,
 	exit(EXIT_FAILURE);
 }
 
+// t_pipex pipe_s(char **argv, char **env, int *end)
+// {
+// 	t_pipex new_struct;
+// 	new_struct = {path, argv, env, pipe};
+// 	return(new_struct);
+// }
+
 int	main(int argc, char *argv[], char *env[])
 {
 	pid_t	pid;
@@ -59,25 +67,27 @@ int	main(int argc, char *argv[], char *env[])
 	char	*path;
 	char	**env_p;
 
-	if (argc != 5)
-	{
-		perror("argument nema\n");
-		exit(EXIT_FAILURE);
-	}
-	if (pipe(end) < 0)
-		return (0);
+	int status = 69;
+
 	path = get_path_envp(env);
 	env_p = get_env_p(path);
+
+	if (argc != 5)
+		exit_(1);
+	if (pipe(end) < 0)
+		exit(-1);
 	pid = fork();
 	if (pid < 0)
 		exit_(1);
 	if (0 == pid)
 		first_state_process(argv, env, end, path, env_p);
 	pid2 = fork();
+	if(pid2 < 0)
+		exit(1);
 	if (0 == pid)
 		second_state_process(argv, env, end, path, env_p); // child nema
 	waitpid(pid, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	waitpid(pid2, &status, 0);
 	parent_process(env_p, path);
-	return (1);
+	return WEXITSTATUS(status);
 }
