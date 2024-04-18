@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:59:03 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/12 15:39:39 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:41:42 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*ft_strdup(const char *src, int c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_putendl_fd(char *s, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

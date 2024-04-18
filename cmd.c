@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/13 18:48:55 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:26:22 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ int	file_open(char *path, int mode)
 		fd = open(path, O_RDONLY);
 	if (mode == 1)
 		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (fd == -1 && mode == 0)
-		exit(0);
-	if (fd == -1 && mode == 1)
-		exit(1);
+	if (fd == -1)
+		exit(EXIT_FAILURE);
 	return (fd);
 }
 
@@ -33,10 +31,16 @@ void	the_exec(char *cmd, char *path, char **env, char **env_p)
 {
 	char	*path_;
 	char	**exec_cmd;
-
 	exec_cmd = ft_split(cmd, ' ');
+
 	path_ = check_cmd(exec_cmd[0], path, env_p);
-	execve(path_, exec_cmd, 0);
+
+	// write(1, path_, ft_strlen(path_));
+	// write(1, path_, ft_strlen(path_));
+	execve(path_, exec_cmd, env);
+	ft_putstr_fd("pipex: command not found: ", 2);
+	ft_putendl_fd(exec_cmd[0], 2);
+	exit(0);
 	free_stuff(exec_cmd);
 	exit(EXIT_FAILURE);
 }
@@ -59,7 +63,6 @@ void	exit_(int mode)
 void	free_stuff(char **someth)
 {
 	int	i;
-
 	i = 0;
 	while (someth[i])
 	{

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_paths.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:40:48 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/13 18:12:32 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:12:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ char	*check_cmd(char *argv_cmd, char *path, char **env_p)
 	while (env_p[i])
 	{
 		res = ft_strjoin(env_p[i], "/");
-		res = ft_strjoin(env_p[i], cmd[0]);
+		char * t = res;
+		res = ft_strjoin(res, cmd[0]);
+		free(t);
+
 		if (access(res, X_OK | F_OK) == 0)
 		{
-			// ft_printf("%s\n", res);
 			free_stuff(cmd);
 			return (res);
 		}
