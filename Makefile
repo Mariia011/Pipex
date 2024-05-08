@@ -15,7 +15,7 @@ OBJS = $(MANDATORY:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(HELPER) $(OBJS)
-	$(GCC) -fsanitize=address $(HELPER) $(OBJS) -o $@
+	$(GCC)  $(HELPER) $(OBJS) -o $@
 
 $(HELPER) :
 	$(MAKE) $(HELPERPATH)

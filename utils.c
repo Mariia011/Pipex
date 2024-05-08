@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:40:48 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/18 15:12:46 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/08 19:20:38 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,21 @@ char	*get_path_envp(char **env)
 	return (path);
 }
 
-char	*check_cmd(char *argv_cmd, char *path, char **env_p)
+//make a  helper fun for check cmd
+//check if it is a bash cmd
+
+static char	*cmd_search(char **cmd, char *path, char **env_p)
 {
 	char	*res;
-	char	**cmd;
 	int		i;
 
 	i = 0;
-	cmd = ft_split(argv_cmd, ' ');
-	if (!cmd)
-		return (0);
 	while (env_p[i])
 	{
 		res = ft_strjoin(env_p[i], "/");
 		char * t = res;
 		res = ft_strjoin(res, cmd[0]);
 		free(t);
-
 		if (access(res, X_OK | F_OK) == 0)
 		{
 			free_stuff(cmd);
@@ -59,9 +57,37 @@ char	*check_cmd(char *argv_cmd, char *path, char **env_p)
 		free(res);
 		res = NULL;
 	}
-	if(res)
-		free(res);
+	free(res);
 	return (0);
+}
+
+void	if_script(char **cmd, char *path, char *res)
+{
+	int i;
+
+	i = 0;
+	while (res[i])
+	{
+		if (res[i] == '/')
+		{
+
+		}
+		i++;
+	}
+}
+
+char	*check_cmd(char *argv_cmd, char *path, char **env_p)
+{
+	char	*res;
+	char	**cmd;
+
+	cmd = ft_split(argv_cmd, ' ');
+	if (!cmd)
+		return (0);
+	res = cmd_search(cmd, path, env_p);
+	if()
+		return(if_script(cmd, path, res));
+	return(res);
 }
 
 char	**get_env_p(char *path)

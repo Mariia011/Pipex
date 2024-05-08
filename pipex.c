@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/18 15:26:37 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/08 18:42:57 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,14 @@ void	first_state_process(char **argv, char **env, int *end, char *path,
 	exit(EXIT_FAILURE);
 }
 
-void	second_state_process(char **argv, char **env, int *end, char *path,
-		char **env_p)
+void	second_state_process(char **argv, char **env, int *end,
+ 		char *path,char **env_p)
 {
 	int	fd;
 
 	fd = file_open(argv[4], 1);
 	dup2(fd, STDOUT_FILENO);
 	dup2(end[0], STDIN_FILENO);
-
 
 	close(end[1]);
 	close(end[0]);
@@ -62,7 +61,7 @@ void	second_state_process(char **argv, char **env, int *end, char *path,
 	exit(EXIT_FAILURE);
 }
 
-int	main(int argc, char *argv[], char *env[])
+int	esh_main(int argc, char *argv[], char *env[])
 {
 	pid_t	pid;
 	pid_t	pid2;
@@ -88,16 +87,17 @@ int	main(int argc, char *argv[], char *env[])
 		exit(1);
 	if (0 == pid2)
 		second_state_process(argv, env, end, path, env_p);
+	parent_process(env_p, path, end);
 	waitpid(pid, NULL, 0);
 	waitpid(pid2, NULL, 0);
-	parent_process(env_p, path, end);
 	return(0);
 	// return WEXITSTATUS(status);
 }
 
-// t_pipex pipe_s(char **argv, char **env, int *end)
-// {
-// 	t_pipex new_struct;
-// 	new_struct = {path, argv, env, pipe};
-// 	return(new_struct);
-// }
+
+int main(int ac, char **av, char **env)
+{
+	esh_main(ac, av, env);
+	// system("leaks pipex");
+	return 0;
+}

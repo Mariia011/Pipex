@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/04/18 15:26:22 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/08 17:00:23 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	file_open(char *path, int mode)
 	return (fd);
 }
 
-// in exit argument there can be EXIT_FAILURE
-
 void	the_exec(char *cmd, char *path, char **env, char **env_p)
 {
 	char	*path_;
@@ -35,12 +33,10 @@ void	the_exec(char *cmd, char *path, char **env, char **env_p)
 
 	path_ = check_cmd(exec_cmd[0], path, env_p);
 
-	// write(1, path_, ft_strlen(path_));
-	// write(1, path_, ft_strlen(path_));
 	execve(path_, exec_cmd, env);
 	ft_putstr_fd("pipex: command not found: ", 2);
 	ft_putendl_fd(exec_cmd[0], 2);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	free_stuff(exec_cmd);
 	exit(EXIT_FAILURE);
 }
@@ -52,7 +48,6 @@ void	exit_(int mode)
 		perror("Not enough arguments\n");
 		exit(EXIT_FAILURE);
 	}
-	// perror("./pipex infile cmd1 cmd2 outfile\n");
 	if (-1 == mode)
 		ft_putendl_fd("pid was built wrong, try again", 2);
 	if (0 == mode)
