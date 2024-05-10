@@ -1,6 +1,6 @@
 NAME = pipex
 
-GCC = gcc #-Wall -Wextra -Werror
+GCC = gcc -Wall -Wextra -Werror
 
 HELPERPATH = ./ft_printf/
 

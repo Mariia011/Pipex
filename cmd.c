@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/08 17:00:23 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:30:40 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,50 @@ int	file_open(char *path, int mode)
 	return (fd);
 }
 
-void	the_exec(char *cmd, char *path, char **env, char **env_p)
+static void	exec_helper(char ***exec_cmd)
+{
+	char	**t;
+	int		i;
+
+	t = NULL;
+	i = 0;
+	while ((*exec_cmd)[i])
+		i++;
+	t = malloc(sizeof(char *) * (i + 2));
+	t[0] = ft_strdup("/bin/bash", '\0');
+	i = 0;
+	while ((*exec_cmd)[i])
+	{
+		t[i + 1] = (*exec_cmd)[i];
+		i++;
+	}
+	t[i + 1] = NULL;
+	free((*exec_cmd));
+	(*exec_cmd) = t;
+}
+
+void	the_exec(char *cmd, char **env, char **env_p)
 {
 	char	*path_;
 	char	**exec_cmd;
+
 	exec_cmd = ft_split(cmd, ' ');
-
-	path_ = check_cmd(exec_cmd[0], path, env_p);
-
+	path_ = check_cmd(exec_cmd[0], env_p);
+	if (!ft_strncmp(path_, "/bin/bash", ft_strlen(path_)))
+	{
+		exec_helper(&exec_cmd);
+	}
 	execve(path_, exec_cmd, env);
 	ft_putstr_fd("pipex: command not found: ", 2);
 	ft_putendl_fd(exec_cmd[0], 2);
-	exit(EXIT_SUCCESS);
 	free_stuff(exec_cmd);
+	free(path_);
 	exit(EXIT_FAILURE);
 }
 
 void	exit_(int mode)
 {
-	if(1 == mode)
+	if (1 == mode)
 	{
 		perror("Not enough arguments\n");
 		exit(EXIT_FAILURE);
@@ -52,12 +77,15 @@ void	exit_(int mode)
 		ft_putendl_fd("pid was built wrong, try again", 2);
 	if (0 == mode)
 		ft_putendl_fd("./pipex infile cmd1 cmd2 outfile\n", 2);
-	exit(-1);
+	if (mode == 2)
+		ft_putstr_fd("pipex: command not found: ", 2);
+	exit(EXIT_FAILURE);
 }
 
 void	free_stuff(char **someth)
 {
 	int	i;
+
 	i = 0;
 	while (someth[i])
 	{
