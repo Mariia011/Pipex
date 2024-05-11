@@ -6,17 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:06:23 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:25:58 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-#define arg_count_error 1
-#define arg_order_error 0
-#define cmd_not_found_error 2
-#define file_not_found_error 3
-#define pipe_error -1
 
 int	file_open(char *path, int mode)
 {

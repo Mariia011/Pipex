@@ -5,6 +5,7 @@
 		"wait.h": "c",
 		"pipex.h": "c",
 		"stdarg.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"unistd.h": "c"
 	}
 }
