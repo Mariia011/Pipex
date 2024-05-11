@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 17:28:59 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:32:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	do_fork(pid_t *pid)
 	if ((*pid) < 0)
 		exit_(1);
 }
-
 
 int	main(int argc, char *argv[], char *env[])
 {

@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:50:34 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 17:26:04 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:33:14 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_stuff(char **someth);
 void	exit_(int mode);
 void	first_state_process_helper(int *files, char *const filename);
 void	second_state_process_helper(int *files, char *const filename);
-char 	**path_helper(char *env[]);
+char	**path_helper(char *env[]);
 int		if_script(char *res);
 
 #endif

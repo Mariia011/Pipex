@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:19:03 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 17:25:59 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:33:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	second_state_process_helper(int *files, char *const filename)
 	close(files[OUT]);
 }
 
-char **path_helper(char *env[])
+char	**path_helper(char *env[])
 {
 	char	*path;
 	char	**env_p;
@@ -34,5 +34,5 @@ char **path_helper(char *env[])
 	path = get_path_envp(env);
 	env_p = get_env_p(path);
 	free(path);
-	return(env_p);
+	return (env_p);
 }
