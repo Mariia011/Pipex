@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:25:58 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:42:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	the_exec(char *cmd, char **env, char **env_p)
 
 void	exit_(int mode)
 {
-	if (arg_count_error == mode || arg_order_error == mode)
+	if (ARG_COUNT_ERROR == mode || ARG_ORDER_ERROR == mode)
 		ft_putstr_fd("./pipex: infile cmd1 cmd2 outfile\n", STDERR_FILENO);
-	else if (mode == cmd_not_found_error)
+	else if (mode == CMD_NOT_FOUND_ERROR)
 		ft_putstr_fd("./pipex: command not found \n", STDERR_FILENO);
-	else if (mode == file_not_found_error || pipe_error == mode)
+	else if (mode == FILE_NOT_FOUND_ERROR || PIPE_NOT_FOUND_ERROR == mode)
 		perror("./pipex: ");
 	exit(EXIT_FAILURE);
 }

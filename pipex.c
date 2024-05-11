@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:32:59 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:44:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	parent_process(int * files, char **env_p, int *end)
+void	parent_process(int *files, char **env_p, int *end)
 {
 	free_stuff(env_p);
 	close(end[0]);
@@ -25,7 +25,6 @@ void	parent_process(int * files, char **env_p, int *end)
 
 static void	first_state_process(char **argv, char **env, int *end, char **env_p)
 {
-
 	dup2(end[1], STDOUT_FILENO);
 	close(end[0]);
 	close(end[1]);
@@ -36,7 +35,6 @@ static void	first_state_process(char **argv, char **env, int *end, char **env_p)
 static void	second_state_process(char **argv, char **env, int *end,
 		char **env_p)
 {
-
 	dup2(end[0], STDIN_FILENO);
 	close(end[1]);
 	close(end[0]);
@@ -50,8 +48,6 @@ static void	do_fork(pid_t *pid)
 	if ((*pid) < 0)
 		exit_(1);
 }
-
-
 
 int	esh_main(int argc, char *argv[], char *env[])
 {
@@ -86,7 +82,6 @@ int	esh_main(int argc, char *argv[], char *env[])
 	parent_process(files, env_p, end);
 	return (EXIT_SUCCESS);
 }
-
 
 int	main(int ac, char **av, char **env)
 {

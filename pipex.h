@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:50:34 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:30:55 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:42:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-#define READ 0
-#define RDWR 1
-#define IN 0
-#define OUT 1
-#define FILES_SIZE 2
-#define arg_count_error 1
-#define arg_order_error 0
-#define cmd_not_found_error 2
-#define file_not_found_error 3
-#define pipe_error -1
+# define READ 0
+# define RDWR 1
+# define IN 0
+# define OUT 1
+# define FILES_SIZE 2
+# define ARG_COUNT_ERROR 1
+# define ARG_ORDER_ERROR 0
+# define CMD_NOT_FOUND_ERROR 2
+# define FILE_NOT_FOUND_ERROR 3
+# define PIPE_NOT_FOUND_ERROR -1
 
 char	*get_path_envp(char **env);
 char	**get_env_p(char *path);
@@ -42,9 +42,9 @@ int		file_open(char *path, int mode);
 void	the_exec(char *cmd, char **env, char **env_p);
 void	free_stuff(char **someth);
 void	exit_(int mode);
-void first_state_process_helper(int *files, char * const filename);
-void second_state_process_helper(int *files, char * const filename);
-void close_files(int *files, const int size);
+void	first_state_process_helper(int *files, char *const filename);
+void	second_state_process_helper(int *files, char *const filename);
+void	close_files(int *files, const int size);
 
 int		if_script(char *res);
 
