@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:40:48 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/10 20:17:22 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:14:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ char	*check_cmd(char *argv_cmd, char **env_p)
 	{
 		if (if_script(cmd[0]) && access(cmd[0], F_OK) == 0)
 			return (ft_strdup("/bin/bash", '\0'));
-		exit_(2);
 	}
 	return (res);
 }
