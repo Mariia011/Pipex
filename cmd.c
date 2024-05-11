@@ -6,11 +6,17 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/10 20:30:40 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:06:23 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+#define arg_count_error 1
+#define arg_order_error 0
+#define cmd_not_found_error 2
+#define file_not_found_error 3
+#define pipe_error -1
 
 int	file_open(char *path, int mode)
 {
@@ -21,7 +27,7 @@ int	file_open(char *path, int mode)
 	if (mode == 1)
 		fd = open(path, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
-		exit(EXIT_FAILURE);
+		exit_(3);
 	return (fd);
 }
 
@@ -68,17 +74,12 @@ void	the_exec(char *cmd, char **env, char **env_p)
 
 void	exit_(int mode)
 {
-	if (1 == mode)
-	{
-		perror("Not enough arguments\n");
-		exit(EXIT_FAILURE);
-	}
-	if (-1 == mode)
-		ft_putendl_fd("pid was built wrong, try again", 2);
-	if (0 == mode)
-		ft_putendl_fd("./pipex infile cmd1 cmd2 outfile\n", 2);
-	if (mode == 2)
-		ft_putstr_fd("pipex: command not found: ", 2);
+	if (arg_count_error == mode || arg_order_error == mode)
+		ft_putstr_fd("./pipex: infile cmd1 cmd2 outfile\n", STDERR_FILENO);
+	else if (mode == cmd_not_found_error)
+		ft_putstr_fd("./pipex: command not found \n", STDERR_FILENO);
+	else if (mode == file_not_found_error || pipe_error == mode)
+		perror("./pipex: ");
 	exit(EXIT_FAILURE);
 }
 

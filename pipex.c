@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/10 20:31:55 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:10:19 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ int	esh_main(int argc, char *argv[], char *env[])
 int	main(int ac, char **av, char **env)
 {
 	esh_main(ac, av, env);
-	system("leaks pipex");
+	// system("leaks pipex");
 }
