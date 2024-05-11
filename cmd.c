@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:47:07 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:42:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:15:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ void	the_exec(char *cmd, char **env, char **env_p)
 
 	exec_cmd = ft_split(cmd, ' ');
 	path_ = check_cmd(exec_cmd[0], env_p);
-	if (!ft_strncmp(path_, "/bin/bash", ft_strlen(path_)))
+	if (path_ != NULL)
 	{
-		exec_helper(&exec_cmd);
+		if (!ft_strncmp(path_, "/bin/bash", ft_strlen(path_)))
+		{
+			exec_helper(&exec_cmd);
+		}
+		execve(path_, exec_cmd, env);
 	}
-	execve(path_, exec_cmd, env);
 	ft_putstr_fd("pipex: command not found: ", 2);
 	ft_putendl_fd(exec_cmd[0], 2);
 	free_stuff(exec_cmd);
