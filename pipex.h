@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:50:34 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:42:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:26:04 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	free_stuff(char **someth);
 void	exit_(int mode);
 void	first_state_process_helper(int *files, char *const filename);
 void	second_state_process_helper(int *files, char *const filename);
-void	close_files(int *files, const int size);
-
+char 	**path_helper(char *env[]);
 int		if_script(char *res);
 
-#endif // PIPEX_H
+#endif

@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:46:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:25:45 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	parent_process(int *files, char **env_p, int *end)
+static void	parent_process(char **env_p, int *end)
 {
 	free_stuff(env_p);
 	close(end[0]);
 	close(end[1]);
 	env_p = NULL;
-	close_files(files, FILES_SIZE);
 	while (-1 != wait(NULL))
 		(void)end;
 }
@@ -49,17 +48,15 @@ static void	do_fork(pid_t *pid)
 		exit_(1);
 }
 
-int	esh_main(int argc, char *argv[], char *env[])
+
+int	main(int argc, char *argv[], char *env[])
 {
 	pid_t	pids[2];
 	int		end[2];
 	int		files[FILES_SIZE];
-	char	*path;
 	char	**env_p;
 
-	path = get_path_envp(env);
-	env_p = get_env_p(path);
-	free(path);
+	env_p = path_helper(env);
 	if (argc != 5)
 		exit_(1);
 	if (pipe(end) < 0)
@@ -67,23 +64,11 @@ int	esh_main(int argc, char *argv[], char *env[])
 	first_state_process_helper(files, argv[1]);
 	do_fork(&pids[0]);
 	if (0 == pids[0])
-	{
-		close(files[IN]);
 		first_state_process(argv, env, end, env_p);
-	}
 	second_state_process_helper(files, argv[4]);
 	do_fork(&pids[1]);
 	if (0 == pids[1])
-	{
-		close(files[OUT]);
 		second_state_process(argv, env, end, env_p);
-	}
-	parent_process(files, env_p, end);
+	parent_process(env_p, end);
 	return (EXIT_SUCCESS);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	esh_main(ac, av, env);
-	// system("leaks pipex");
 }
