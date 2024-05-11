@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:22:27 by marikhac          #+#    #+#             */
-/*   Updated: 2024/05/11 16:44:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:46:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ static void	do_fork(pid_t *pid)
 
 int	esh_main(int argc, char *argv[], char *env[])
 {
-	pid_t	pid;
-	pid_t	pid2;
+	pid_t	pids[2];
 	int		end[2];
 	int		files[FILES_SIZE];
 	char	*path;
@@ -66,15 +65,15 @@ int	esh_main(int argc, char *argv[], char *env[])
 	if (pipe(end) < 0)
 		exit(EXIT_FAILURE);
 	first_state_process_helper(files, argv[1]);
-	do_fork(&pid);
-	if (0 == pid)
+	do_fork(&pids[0]);
+	if (0 == pids[0])
 	{
 		close(files[IN]);
 		first_state_process(argv, env, end, env_p);
 	}
 	second_state_process_helper(files, argv[4]);
-	do_fork(&pid2);
-	if (0 == pid2)
+	do_fork(&pids[1]);
+	if (0 == pids[1])
 	{
 		close(files[OUT]);
 		second_state_process(argv, env, end, env_p);
